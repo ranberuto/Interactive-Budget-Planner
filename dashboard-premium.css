@@ -164,7 +164,7 @@
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
     position: relative;
     z-index: 1;
 }
@@ -329,14 +329,14 @@
 .charts-grid-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 2.5rem;
-    margin-bottom: 3rem;
+    gap: 2rem;
+    margin-bottom: 4.5rem;
 }
 
 .charts-grid-secondary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
@@ -350,7 +350,7 @@
 .premium-insights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .premium-chart-card {
@@ -454,8 +454,8 @@
 .expense-details-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-    margin-top: 2.5rem;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .budget-categories-section {
@@ -634,7 +634,7 @@
 .premium-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .premium-summary-item {
@@ -720,7 +720,7 @@
 .premium-insights {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .premium-insight-item {
