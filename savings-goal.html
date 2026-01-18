@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goals | BudgetPlanner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💰 EveryJuan</a>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="planner.html"><i class="fas fa-calculator"></i> Planner</a></li>
+                <li><a href="savings-goal.html" class="active"><i class="fas fa-target"></i> Savings Goal</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Savings Goal Header -->
+    <section class="savings-header">
+        <div class="container">
+            <h1><i class="fas fa-target"></i> Savings Goals</h1>
+            <p class="subtitle">Set, track, and achieve your financial goals with smart insights</p>
+            
+            <!-- Overall Savings Summary -->
+            <div class="overall-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Total Saved</span>
+                    <span class="summary-value" id="total-saved-amount">₱0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Goal Target</span>
+                    <span class="summary-value" id="total-goal-target">₱0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Overall Progress</span>
+                    <span class="summary-value" id="overall-progress-pct">0%</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Remaining</span>
+                    <span class="summary-value" id="total-remaining-amount">₱0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="savings-content">
+        <div class="container">
+            <div class="savings-grid">
+                <!-- Left Column: Add New Goal Form -->
+                <div class="savings-left">
+                    <!-- Add Goal Form -->
+                    <div class="card goal-form-card">
+                        <h3><i class="fas fa-plus-circle"></i> Create New Savings Goal</h3>
+                        <form id="goal-form">
+                            <div class="form-group">
+                                <label for="goal-name">Goal Name</label>
+                                <input type="text" id="goal-name" class="form-control" 
+                                       placeholder="e.g., Emergency Fund, Vacation, Car" required>
+                                <p class="form-help">Give your goal a meaningful name</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goal-target">Target Amount (₱)</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">₱</span>
+                                    <input type="number" id="goal-target" class="form-control" 
+                                           placeholder="100000" min="0" step="0.01" required>
+                                </div>
+                                <p class="form-help">How much do you want to save?</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goal-current">Current Saved Amount (₱)</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">₱</span>
+                                    <input type="number" id="goal-current" class="form-control" 
+                                           placeholder="0" min="0" step="0.01">
+                                </div>
+                                <p class="form-help">How much have you saved so far? (optional)</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goal-deadline">Target Deadline</label>
+                                <input type="date" id="goal-deadline" class="form-control" required>
+                                <p class="form-help">When do you want to reach this goal?</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goal-category">Goal Category</label>
+                                <select id="goal-category" class="form-control" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Emergency Fund">🆘 Emergency Fund</option>
+                                    <option value="Vacation">✈️ Vacation</option>
+                                    <option value="Vehicle">🚗 Vehicle</option>
+                                    <option value="Home">🏠 Home/Property</option>
+                                    <option value="Education">📚 Education</option>
+                                    <option value="Investment">📈 Investment</option>
+                                    <option value="Wedding">💒 Wedding</option>
+                                    <option value="Retirement">🏖️ Retirement</option>
+                                    <option value="Other">📦 Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="goal-priority">Priority Level</label>
+                                <select id="goal-priority" class="form-control" required>
+                                    <option value="High">🔴 High Priority</option>
+                                    <option value="Medium" selected>🟡 Medium Priority</option>
+                                    <option value="Low">🟢 Low Priority</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Create Goal
+                                </button>
+                                <button type="button" id="clear-goal-form" class="btn btn-secondary">
+                                    <i class="fas fa-undo"></i> Clear
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Quick Tips -->
+                    <div class="card tips-card">
+                        <h3><i class="fas fa-lightbulb"></i> Savings Tips</h3>
+                        <div class="quick-tips-list">
+                            <div class="quick-tip">
+                                <div class="tip-icon">💡</div>
+                                <div>
+                                    <strong>Start Small</strong>
+                                    <p>Even ₱100 per month adds up. Don't wait for perfect conditions.</p>
+                                </div>
+                            </div>
+                            <div class="quick-tip">
+                                <div class="tip-icon">🎯</div>
+                                <div>
+                                    <strong>Be Specific</strong>
+                                    <p>Clear goals are more motivating than vague ones.</p>
+                                </div>
+                            </div>
+                            <div class="quick-tip">
+                                <div class="tip-icon">📅</div>
+                                <div>
+                                    <strong>Set Deadlines</strong>
+                                    <p>A timeline creates urgency and helps with planning.</p>
+                                </div>
+                            </div>
+                            <div class="quick-tip">
+                                <div class="tip-icon">📊</div>
+                                <div>
+                                    <strong>Track Progress</strong>
+                                    <p>Regularly update your savings to stay motivated.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Goals List & Tracking -->
+                <div class="savings-right">
+                    <!-- Filter and Sort -->
+                    <div class="card goals-controls">
+                        <div class="controls-group">
+                            <select id="filter-status" class="form-control">
+                                <option value="">All Goals</option>
+                                <option value="on-track">✅ On Track</option>
+                                <option value="at-risk">⚠️ At Risk</option>
+                                <option value="off-track">❌ Off Track</option>
+                                <option value="completed">🎉 Completed</option>
+                            </select>
+                            <select id="sort-goals" class="form-control">
+                                <option value="deadline">Sort by Deadline</option>
+                                <option value="priority">Sort by Priority</option>
+                                <option value="progress">Sort by Progress</option>
+                                <option value="name">Sort by Name</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Goals List -->
+                    <div id="goals-list" class="goals-list">
+                        <div class="empty-state">
+                            <i class="fas fa-target"></i>
+                            <p>No savings goals yet. Create your first goal above!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Tips Modal (Hidden by default) -->
+    <div id="tips-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="tips-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💰 EveryJuan BudgetPlanner</h3>
+                    <p>Making personal finance management simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="planner.html">Budget Planner</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@everyjuanbudgetplanner.com</p>
+                    <p><i class="fas fa-phone"></i> +639 09876 5083</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EveryJuanBudgetPlanner. All rights reserved. | Personal Finance Management Tool</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="savings-goal.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryJuan Budget Planner | Personal Finance Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💰 EveryJuan</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="planner.html"><i class="fas fa-calculator"></i> Planner</a></li>
+                <li><a href="savings-goal.html"><i class="fas fa-target"></i> Savings Goal</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Typing Animation -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="typing-animation"></h1>
+                <p class="hero-subtitle">Take control of your finances with our intuitive budget planning tools. No sign-up required. Start managing your money smarter today.</p>
+                
+                <div class="cta-buttons">
+                    <a href="planner.html" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Start Planning Now
+                    </a>
+                    <a href="dashboard.html" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> View Demo Dashboard
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="financial-cards">
+                    <div class="card stat-card">
+                        <i class="fas fa-wallet"></i>
+                        <h3>Track Expenses</h3>
+                        <p>Monitor where your money goes</p>
+                    </div>
+                    <div class="card stat-card">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>Save Money</h3>
+                        <p>Reach your financial goals faster</p>
+                    </div>
+                    <div class="card stat-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Visual Insights</h3>
+                        <p>Understand your spending habits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose BudgetPlanner?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>100% Private</h3>
+                    <p>No account needed. All data stays in your browser.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Simple interface designed for everyone, no finance degree required.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices - desktop, tablet, or phone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <h2>See Your Financial Health</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="income-stat">$0</div>
+                    <div class="stat-label">Monthly Income</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="expense-stat">$0</div>
+                    <div class="stat-label">Monthly Expenses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="savings-stat">$0</div>
+                    <div class="stat-label">Monthly Savings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="budget-stat">0%</div>
+                    <div class="stat-label">On Budget</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💰 BudgetPlanner</h3>
+                    <p>Making personal finance management simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="planner.html">Budget Planner</a></li>
+                        <li><a href="savings-goal.html">Savings Goals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@budgetplanner.com</p>
+                    <p><i class="fas fa-phone"></i> +63 (2) 1234-5678</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BudgetPlanner. All rights reserved. | Personal Finance Management Tool</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

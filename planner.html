@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner | Manage Your Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💰 EveryJuan</a>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="planner.html" class="active"><i class="fas fa-calculator"></i> Planner</a></li>
+                <li><a href="savings-goal.html"><i class="fas fa-target"></i> Savings Goal</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Planner Header -->
+    <section class="planner-header">
+        <div class="container">
+            <h1><i class="fas fa-calculator"></i> Budget Planner</h1>
+            <p class="subtitle">Plan, track, and manage your monthly income and expenses</p>
+            <div class="quick-stats-bar">
+                <div class="quick-stat">
+                    <span class="stat-label">Monthly Budget:</span>
+                    <span class="stat-value" id="quick-monthly-budget">₱0</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="stat-label">Remaining:</span>
+                    <span class="stat-value" id="quick-remaining">₱0</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="stat-label">Expenses:</span>
+                    <span class="stat-value" id="quick-expenses">₱0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Planner Content -->
+    <section class="planner-content">
+        <div class="container">
+            <div class="planner-grid">
+                <!-- Left Column: Income & Expense Forms -->
+                <div class="planner-left">
+                    <!-- Income Section -->
+                    <div class="income-section card">
+                        <h3><i class="fas fa-money-bill-wave"></i> Set Your Monthly Income</h3>
+                        <div class="form-group">
+                            <label for="monthly-income">Monthly Income (After Tax)</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">₱</span>
+                                <input type="number" id="monthly-income" class="form-control" 
+                                       placeholder="Enter your monthly income" min="0" step="0.01">
+                            </div>
+                            <p class="form-help">Enter your total take-home pay for the month</p>
+                        </div>
+                        <button id="save-income" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Income
+                        </button>
+                    </div>
+
+                    <!-- Add Expense Form -->
+                    <div class="expense-form-section card">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Expense</h3>
+                        <form id="expense-form">
+                            <div class="form-group">
+                                <label for="expense-name">Expense Name</label>
+                                <input type="text" id="expense-name" class="form-control" 
+                                       placeholder="e.g., Groceries, Rent, Netflix" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expense-amount">Amount</label>
+                                    <div class="input-with-icon">
+                                        <span class="input-icon">₱</span>
+                                        <input type="number" id="expense-amount" class="form-control" 
+                                               placeholder="0.00" min="0" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expense-category">Category</label>
+                                    <select id="expense-category" class="form-control" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Housing">🏠 Housing</option>
+                                        <option value="Transportation">🚗 Transportation</option>
+                                        <option value="Food">🍔 Food</option>
+                                        <option value="Utilities">💡 Utilities</option>
+                                        <option value="Healthcare">🏥 Healthcare</option>
+                                        <option value="Entertainment">🎬 Entertainment</option>
+                                        <option value="Education">📚 Education</option>
+                                        <option value="Shopping">🛍️ Shopping</option>
+                                        <option value="Savings">💰 Savings</option>
+                                        <option value="Debt">💳 Debt Payment</option>
+                                        <option value="Other">📦 Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expense-date">Date</label>
+                                <input type="date" id="expense-date" class="form-control" 
+                                       value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expense-notes">Notes (Optional)</label>
+                                <textarea id="expense-notes" class="form-control" 
+                                          placeholder="Add any notes about this expense..." 
+                                          rows="2"></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Add Expense
+                                </button>
+                                <button type="button" id="clear-form" class="btn btn-secondary">
+                                    <i class="fas fa-undo"></i> Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Budget Categories -->
+                    <div class="categories-section card">
+                        <h3><i class="fas fa-tags"></i> Budget Categories</h3>
+                        <div class="categories-list" id="categories-list">
+                            <!-- Categories will be loaded here -->
+                        </div>
+                        <div class="add-category">
+                            <input type="text" id="new-category" class="form-control" 
+                                   placeholder="Add custom category">
+                            <button id="add-category-btn" class="btn btn-secondary">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Expense List & Summary -->
+                <div class="planner-right">
+                    <!-- Expenses Summary -->
+                    <div class="expenses-summary card">
+                        <h3><i class="fas fa-list-alt"></i> Expenses Summary</h3>
+                        <div class="summary-stats">
+                            <div class="summary-stat">
+                                <div class="stat-label">Total Expenses</div>
+                                <div class="stat-value expense-value" id="total-expenses-summary">₱0</div>
+                            </div>
+                            <div class="summary-stat">
+                                <div class="stat-label">Remaining Budget</div>
+                                <div class="stat-value savings-value" id="remaining-budget">₱0</div>
+                            </div>
+                            <div class="summary-stat">
+                                <div class="stat-label">Number of Items</div>
+                                <div class="stat-value" id="expense-count">0</div>
+                            </div>
+                        </div>
+
+                        <div class="budget-progress">
+                            <div class="progress-header">
+                                <span>Budget Usage</span>
+                                <span id="budget-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="budget-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span>₱0</span>
+                                <span id="income-amount">₱0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expense List -->
+                    <div class="expenses-list card">
+                        <div class="list-header">
+                            <h3><i class="fas fa-receipt"></i> Your Expenses</h3>
+                            <div class="list-controls">
+                                <select id="filter-category" class="form-control">
+                                    <option value="">All Categories</option>
+                                </select>
+                                <button id="clear-all-expenses" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Clear All
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="expenses-table-container">
+                            <table class="expenses-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenses-list-body">
+                                    <!-- Expenses will be loaded here -->
+                                    <tr class="no-expenses">
+                                        <td colspan="5">
+                                            <div class="empty-state">
+                                                <i class="fas fa-clipboard-list"></i>
+                                                <p>No expenses added yet. Add your first expense above!</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="list-footer">
+                            <div class="pagination">
+                                <button id="prev-page" class="btn-icon" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <span id="page-info">Page 1 of 1</span>
+                                <button id="next-page" class="btn-icon" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="total-summary">
+                                <strong>Total:</strong> <span id="list-total">₱0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Budget Calculator -->
+                    <div class="calculator-section card">
+                        <h3><i class="fas fa-calculator"></i> Quick Budget Calculator</h3>
+                        <div class="calculator-form">
+                            <div class="form-group">
+                                <label>Enter amount to see daily/weekly equivalent:</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">₱</span>
+                                    <input type="number" id="calculator-input" class="form-control" 
+                                           placeholder="100" min="0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="calculator-results">
+                                <div class="result">
+                                    <span class="result-label">Daily:</span>
+                                    <span class="result-value" id="daily-result">₱0.00</span>
+                                </div>
+                                <div class="result">
+                                    <span class="result-label">Weekly:</span>
+                                    <span class="result-value" id="weekly-result">₱0.00</span>
+                                </div>
+                                <div class="result">
+                                    <span class="result-label">Monthly:</span>
+                                    <span class="result-value" id="monthly-result">₱0.00</span>
+                                </div>
+                                <div class="result">
+                                    <span class="result-label">Yearly:</span>
+                                    <span class="result-value" id="yearly-result">₱0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Budget Tips -->
+                    <div class="tips-section card">
+                        <h3><i class="fas fa-lightbulb"></i> Budgeting Tips</h3>
+                        <div class="tips-list">
+                            <div class="tip">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Try the 50/30/20 rule: 50% needs, 30% wants, 20% savings</span>
+                            </div>
+                            <div class="tip">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Review your expenses weekly to stay on track</span>
+                            </div>
+                            <div class="tip">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Set aside savings as soon as you get paid</span>
+                            </div>
+                            <div class="tip">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Use categories to understand your spending patterns</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="action-section">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="dashboard.html" class="btn btn-primary">
+                    <i class="fas fa-chart-bar"></i> View Dashboard
+                </a>
+                <button id="export-data" class="btn btn-secondary">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button id="import-data" class="btn btn-secondary">
+                    <i class="fas fa-upload"></i> Import Data
+                </button>
+                <button id="print-budget" class="btn btn-secondary">
+                    <i class="fas fa-print"></i> Print Budget
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💰 BudgetPlanner</h3>
+                    <p>Making personal finance management simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="planner.html">Budget Planner</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@budgetplanner.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2024</span> BudgetPlanner. All rights reserved. | Personal Finance Management Tool</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="script.js"></script>
+    
+    <!-- Planner-specific JavaScript -->
+    <script>
+        // Planner-specific variables
+        let currentPage = 1;
+        const itemsPerPage = 8;
+        let filteredExpenses = [];
+        
+        // Initialize planner when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPlannerData();
+            setupEventListeners();
+            updateCurrentYear();
+            initializeCategories();
+        });
+        
+        // Load data from localStorage
+        function loadPlannerData() {
+            const savedData = localStorage.getItem('budgetData');
+            if (savedData) {
+                const budgetData = JSON.parse(savedData);
+                
+                // Set income value
+                if (budgetData.income > 0) {
+                    document.getElementById('monthly-income').value = budgetData.income;
+                }
+                
+                // Load expenses
+                filteredExpenses = budgetData.expenses;
+                
+                // Update UI
+                updatePlannerUI(budgetData);
+                renderExpensesTable();
+                updateFilterCategories();
+            }
+        }
+        
+        // Update all UI elements
+        function updatePlannerUI(budgetData) {
+            const totalExpenses = budgetData.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const remainingBudget = Math.max(0, budgetData.income - totalExpenses);
+            const budgetPercentage = budgetData.income > 0 ? Math.min(100, (totalExpenses / budgetData.income * 100)) : 0;
+            
+            // Update quick stats
+            document.getElementById('quick-monthly-budget').textContent = `₱${budgetData.income.toLocaleString()}`;
+            document.getElementById('quick-expenses').textContent = `₱${totalExpenses.toLocaleString()}`;
+            document.getElementById('quick-remaining').textContent = `₱${remainingBudget.toLocaleString()}`;
+            
+            // Update summary section
+            document.getElementById('total-expenses-summary').textContent = `₱${totalExpenses.toLocaleString()}`;
+            document.getElementById('remaining-budget').textContent = `₱${remainingBudget.toLocaleString()}`;
+            document.getElementById('expense-count').textContent = budgetData.expenses.length;
+            document.getElementById('income-amount').textContent = `₱${budgetData.income.toLocaleString()}`;
+            document.getElementById('budget-percentage').textContent = `${budgetPercentage.toFixed(1)}%`;
+            
+            // Update progress bar
+            document.getElementById('budget-progress-fill').style.width = `₱{budgetPercentage}%`;
+            
+            // Update list total
+            document.getElementById('list-total').textContent = `₱${totalExpenses.toLocaleString()}`;
+            
+            // Update progress bar color based on usage
+            const progressFill = document.getElementById('budget-progress-fill');
+            if (budgetPercentage <= 70) {
+                progressFill.style.background = 'linear-gradient(90deg, #4cc9f0, #4361ee)';
+            } else if (budgetPercentage <= 90) {
+                progressFill.style.background = 'linear-gradient(90deg, #f8961e, #f72585)';
+            } else {
+                progressFill.style.background = 'linear-gradient(90deg, #f72585, #d90429)';
+            }
+        }
+        
+        // Render expenses table with pagination
+        function renderExpensesTable() {
+            const tbody = document.getElementById('expenses-list-body');
+            const noExpensesRow = document.querySelector('.no-expenses');
+            const pageInfo = document.getElementById('page-info');
+            const prevBtn = document.getElementById('prev-page');
+            const nextBtn = document.getElementById('next-page');
+            
+            if (filteredExpenses.length === 0) {
+                if (noExpensesRow) {
+                    noExpensesRow.style.display = '';
+                }
+                pageInfo.textContent = 'Page 1 of 1';
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                return;
+            }
+            
+            // Hide "no expenses" message
+            if (noExpensesRow) {
+                noExpensesRow.style.display = 'none';
+            }
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredExpenses.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredExpenses.length);
+            const pageExpenses = filteredExpenses.slice(startIndex, endIndex);
+            
+            // Clear table
+            tbody.innerHTML = '';
+            
+            // Add rows for current page
+            pageExpenses.forEach((expense, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="expense-name">
+                            <strong>${expense.name}</strong>
+                            ${expense.notes ? `<small>${expense.notes}</small>` : ''}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="category-badge" data-category="${expense.category}">
+                            ${getCategoryEmoji(expense.category)} ${expense.category}
+                        </span>
+                    </td>
+                    <td class="expense-amount">-$${expense.amount.toFixed(2)}</td>
+                    <td class="expense-date">${expense.date}</td>
+                    <td>
+                        <div class="action-buttons-small">
+                            <button class="btn-icon edit-expense" data-id="${expense.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon delete-expense" data-id="${expense.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // Update pagination controls
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            // Add event listeners to new buttons
+            document.querySelectorAll('.edit-expense').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editExpense(parseInt(this.dataset.id));
+                });
+            });
+            
+            document.querySelectorAll('.delete-expense').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteExpense(parseInt(this.dataset.id));
+                });
+            });
+        }
+        
+        // Get emoji for category
+        function getCategoryEmoji(category) {
+            const emojiMap = {
+                'Housing': '🏠',
+                'Transportation': '🚗',
+                'Food': '🍔',
+                'Utilities': '💡',
+                'Healthcare': '🏥',
+                'Entertainment': '🎬',
+                'Education': '📚',
+                'Shopping': '🛍️',
+                'Savings': '💰',
+                'Debt': '💳',
+                'Other': '📦'
+            };
+            return emojiMap[category] || '📝';
+        }
+        
+        // Initialize categories list
+        function initializeCategories() {
+            const categoriesList = document.getElementById('categories-list');
+            const defaultCategories = [
+                '🏠 Housing', '🚗 Transportation', '🍔 Food', '💡 Utilities',
+                '🏥 Healthcare', '🎬 Entertainment', '📚 Education', '🛍️ Shopping',
+                '💰 Savings', '💳 Debt', '📦 Other'
+            ];
+            
+            categoriesList.innerHTML = defaultCategories.map(category => `
+                <div class="category-item">
+                    <span class="category-name">${category}</span>
+                    ${category.includes('Other') || category.includes('Savings') || category.includes('Debt') ? '' : 
+                    `<button class="btn-icon remove-category" data-category="${category.replace(/[^a-zA-Z]/g, '')}">
+                        <i class="fas fa-times"></i>
+                    </button>`}
+                </div>
+            `).join('');
+            
+            // Load custom categories from localStorage
+            const savedData = localStorage.getItem('budgetData');
+            if (savedData) {
+                const budgetData = JSON.parse(savedData);
+                if (budgetData.customCategories) {
+                    budgetData.customCategories.forEach(category => {
+                        if (!defaultCategories.includes(category)) {
+                            addCategoryToUI(category);
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Add category to UI
+        function addCategoryToUI(category) {
+            const categoriesList = document.getElementById('categories-list');
+            const categoryItem = document.createElement('div');
+            categoryItem.className = 'category-item';
+            categoryItem.innerHTML = `
+                <span class="category-name">${category}</span>
+                <button class="btn-icon remove-category" data-category="${category.replace(/[^a-zA-Z]/g, '')}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            categoriesList.appendChild(categoryItem);
+        }
+        
+        // Update filter categories dropdown
+        function updateFilterCategories() {
+            const savedData = localStorage.getItem('budgetData');
+            if (!savedData) return;
+            
+            const budgetData = JSON.parse(savedData);
+            const filterSelect = document.getElementById('filter-category');
+            const categories = new Set(budgetData.expenses.map(e => e.category));
+            
+            // Clear existing options except "All Categories"
+            filterSelect.innerHTML = '<option value="">All Categories</option>';
+            
+            // Add categories from expenses
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = `${getCategoryEmoji(category)} ${category}`;
+                filterSelect.appendChild(option);
+            });
+            
+            // Add custom categories if they exist
+            if (budgetData.customCategories) {
+                budgetData.customCategories.forEach(category => {
+                    if (!categories.has(category)) {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.textContent = `${getCategoryEmoji(category)} ${category}`;
+                        filterSelect.appendChild(option);
+                    }
+                });
+            }
+        }
+        
+        // Edit expense
+        function editExpense(id) {
+            const savedData = localStorage.getItem('budgetData');
+            if (!savedData) return;
+            
+            const budgetData = JSON.parse(savedData);
+            const expense = budgetData.expenses.find(e => e.id === id);
+            
+            if (expense) {
+                // Fill form with expense data
+                document.getElementById('expense-name').value = expense.name;
+                document.getElementById('expense-amount').value = expense.amount;
+                document.getElementById('expense-category').value = expense.category;
+                document.getElementById('expense-date').value = expense.date;
+                document.getElementById('expense-notes').value = expense.notes || '';
+                
+                // Change button text
+                const submitBtn = document.querySelector('#expense-form button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Update Expense';
+                submitBtn.dataset.editId = id;
+                
+                // Scroll to form
+                document.getElementById('expense-name').focus();
+                
+                showAlert('Edit the expense details and click "Update Expense"', 'info');
+            }
+        }
+        
+        // Delete expense
+        function deleteExpense(id) {
+            if (confirm('Are you sure you want to delete this expense?')) {
+                const savedData = localStorage.getItem('budgetData');
+                if (!savedData) return;
+                
+                const budgetData = JSON.parse(savedData);
+                budgetData.expenses = budgetData.expenses.filter(e => e.id !== id);
+                
+                localStorage.setItem('budgetData', JSON.stringify(budgetData));
+                
+                filteredExpenses = filteredExpenses.filter(e => e.id !== id);
+                updatePlannerUI(budgetData);
+                renderExpensesTable();
+                
+                showAlert('Expense deleted successfully!', 'success');
+            }
+        }
+        
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Save income button
+            document.getElementById('save-income').addEventListener('click', function() {
+                const incomeInput = document.getElementById('monthly-income');
+                const income = parseFloat(incomeInput.value);
+                
+                if (isNaN(income) || income <= 0) {
+                    showAlert('Please enter a valid income amount greater than 0', 'danger');
+                    incomeInput.focus();
+                    return;
+                }
+                
+                const savedData = localStorage.getItem('budgetData');
+                let budgetData = savedData ? JSON.parse(savedData) : { income: 0, expenses: [] };
+                budgetData.income = income;
+                
+                localStorage.setItem('budgetData', JSON.stringify(budgetData));
+                updatePlannerUI(budgetData);
+                
+                showAlert('Monthly income saved successfully!', 'success');
+            });
+            
+            // Expense form submission
+            document.getElementById('expense-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('expense-name').value.trim();
+                const amount = parseFloat(document.getElementById('expense-amount').value);
+                const category = document.getElementById('expense-category').value;
+                const date = document.getElementById('expense-date').value;
+                const notes = document.getElementById('expense-notes').value.trim();
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const isEdit = submitBtn.dataset.editId;
+                
+                // Validation
+                if (!name) {
+                    showAlert('Please enter an expense name', 'danger');
+                    return;
+                }
+                
+                if (isNaN(amount) || amount <= 0) {
+                    showAlert('Please enter a valid amount greater than 0', 'danger');
+                    return;
+                }
+                
+                if (!category) {
+                    showAlert('Please select a category', 'danger');
+                    return;
+                }
+                
+                // Load existing data
+                const savedData = localStorage.getItem('budgetData');
+                let budgetData = savedData ? JSON.parse(savedData) : { income: 0, expenses: [] };
+                
+                if (isEdit) {
+                    // Update existing expense
+                    const expenseIndex = budgetData.expenses.findIndex(e => e.id === parseInt(isEdit));
+                    if (expenseIndex !== -1) {
+                        budgetData.expenses[expenseIndex] = {
+                            ...budgetData.expenses[expenseIndex],
+                            name,
+                            amount,
+                            category,
+                            date,
+                            notes
+                        };
+                    }
+                    
+                    // Reset button
+                    submitBtn.innerHTML = '<i class="fas fa-plus"></i> Add Expense';
+                    delete submitBtn.dataset.editId;
+                    
+                    showAlert('Expense updated successfully!', 'success');
+                } else {
+                    // Add new expense
+                    const expense = {
+                        id: Date.now(),
+                        name,
+                        amount,
+                        category,
+                        date: date || new Date().toISOString().split('T')[0],
+                        notes
+                    };
+                    
+                    budgetData.expenses.push(expense);
+                    showAlert('Expense added successfully!', 'success');
+                }
+                
+                // Save data
+                localStorage.setItem('budgetData', JSON.stringify(budgetData));
+                
+                // Update UI
+                filteredExpenses = budgetData.expenses;
+                updatePlannerUI(budgetData);
+                renderExpensesTable();
+                updateFilterCategories();
+                
+                // Clear form
+                this.reset();
+                document.getElementById('expense-date').value = new Date().toISOString().split('T')[0];
+                document.getElementById('expense-name').focus();
+            });
+            
+            // Clear form button
+            document.getElementById('clear-form').addEventListener('click', function() {
+                document.getElementById('expense-form').reset();
+                document.getElementById('expense-date').value = new Date().toISOString().split('T')[0];
+                const submitBtn = document.querySelector('#expense-form button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-plus"></i> Add Expense';
+                delete submitBtn.dataset.editId;
+                document.getElementById('expense-name').focus();
+            });
+            
+            // Add category button
+            document.getElementById('add-category-btn').addEventListener('click', function() {
+                const input = document.getElementById('new-category');
+                const category = input.value.trim();
+                
+                if (!category) {
+                    showAlert('Please enter a category name', 'danger');
+                    return;
+                }
+                
+                if (category.length > 20) {
+                    showAlert('Category name must be less than 20 characters', 'danger');
+                    return;
+                }
+                
+                // Load existing data
+                const savedData = localStorage.getItem('budgetData');
+                let budgetData = savedData ? JSON.parse(savedData) : { income: 0, expenses: [] };
+                
+                // Initialize customCategories array if it doesn't exist
+                if (!budgetData.customCategories) {
+                    budgetData.customCategories = [];
+                }
+                
+                // Add category if not already exists
+                if (!budgetData.customCategories.includes(category)) {
+                    budgetData.customCategories.push(category);
+                    localStorage.setItem('budgetData', JSON.stringify(budgetData));
+                    
+                    // Add to UI
+                    addCategoryToUI(category);
+                    
+                    // Clear input
+                    input.value = '';
+                    input.focus();
+                    
+                    showAlert('Category added successfully!', 'success');
+                } else {
+                    showAlert('Category already exists', 'warning');
+                }
+            });
+            
+            // Category enter key support
+            document.getElementById('new-category').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('add-category-btn').click();
+                }
+            });
+            
+            // Filter expenses by category
+            document.getElementById('filter-category').addEventListener('change', function() {
+                const category = this.value;
+                const savedData = localStorage.getItem('budgetData');
+                
+                if (!savedData) return;
+                
+                const budgetData = JSON.parse(savedData);
+                
+                if (category) {
+                    filteredExpenses = budgetData.expenses.filter(e => e.category === category);
+                } else {
+                    filteredExpenses = budgetData.expenses;
+                }
+                
+                currentPage = 1;
+                renderExpensesTable();
+            });
+            
+            // Clear all expenses button
+            document.getElementById('clear-all-expenses').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear ALL expenses? This cannot be undone.')) {
+                    const savedData = localStorage.getItem('budgetData');
+                    if (!savedData) return;
+                    
+                    const budgetData = JSON.parse(savedData);
+                    budgetData.expenses = [];
+                    
+                    localStorage.setItem('budgetData', JSON.stringify(budgetData));
+                    
+                    filteredExpenses = [];
+                    updatePlannerUI(budgetData);
+                    renderExpensesTable();
+                    
+                    showAlert('All expenses have been cleared!', 'success');
+                }
+            });
+            
+            // Pagination buttons
+            document.getElementById('prev-page').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderExpensesTable();
+                }
+            });
+            
+            document.getElementById('next-page').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredExpenses.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderExpensesTable();
+                }
+            });
+            
+            // Calculator input
+            document.getElementById('calculator-input').addEventListener('input', function() {
+                const value = parseFloat(this.value) || 0;
+                
+                document.getElementById('daily-result').textContent = `₱${(value / 30).toFixed(2)}`;
+                document.getElementById('weekly-result').textContent = `₱${(value / 4.33).toFixed(2)}`;
+                document.getElementById('monthly-result').textContent = `₱${value.toFixed(2)}`;
+                document.getElementById('yearly-result').textContent = `₱${(value * 12).toFixed(2)}`;
+            });
+            
+            // Export data button
+            document.getElementById('export-data').addEventListener('click', function() {
+                const savedData = localStorage.getItem('budgetData');
+                const data = savedData ? JSON.parse(savedData) : { income: 0, expenses: [] };
+                
+                const dataStr = JSON.stringify(data, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `budget-data-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showAlert('Data exported successfully!', 'success');
+            });
+            
+            // Import data button
+            document.getElementById('import-data').addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            
+                            // Validate data structure
+                            if (typeof data.income === 'number' && Array.isArray(data.expenses)) {
+                                localStorage.setItem('budgetData', JSON.stringify(data));
+                                loadPlannerData();
+                                showAlert('Data imported successfully!', 'success');
+                            } else {
+                                showAlert('Invalid data format', 'danger');
+                            }
+                        } catch (error) {
+                            showAlert('Error reading file. Please make sure it\'s a valid JSON file.', 'danger');
+                        }
+                    };
+                    
+                    reader.readAsText(file);
+                };
+                
+                input.click();
+            });
+            
+            // Print budget button
+            document.getElementById('print-budget').addEventListener('click', function() {
+                window.print();
+            });
+        }
+        
+        // Update current year in footer
+        function updateCurrentYear() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        }
+        
+        // Show alert message
+        function showAlert(message, type) {
+            // Remove any existing alerts
+            const existingAlert = document.querySelector('.planner-alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            // Create alert
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `planner-alert alert alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+                <button class="close-alert">&times;</button>
+            `;
+            
+            // Insert at top of content
+            const content = document.querySelector('.planner-content .container');
+            content.insertBefore(alertDiv, content.firstChild);
+            
+            // Close button event
+            alertDiv.querySelector('.close-alert').addEventListener('click', function() {
+                alertDiv.remove();
+            });
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // Add custom CSS for planner page
+        const style = document.createElement('style');
+        style.textContent = `
+            .planner-header {
+                padding: 2rem 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+            }
+            
+            .planner-header h1 {
+                color: white;
+                margin-bottom: 0.5rem;
+            }
+            
+            .subtitle {
+                opacity: 0.9;
+                margin-bottom: 1.5rem;
+            }
+            
+            .quick-stats-bar {
+                display: flex;
+                gap: 2rem;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                backdrop-filter: blur(10px);
+            }
+            
+            .quick-stat {
+                flex: 1;
+            }
+            
+            .quick-stat .stat-label {
+                display: block;
+                font-size: 0.9rem;
+                opacity: 0.8;
+                margin-bottom: 0.25rem;
+            }
+            
+            .quick-stat .stat-value {
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+            
+            .planner-grid {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr;
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            
+            @media (max-width: 992px) {
+                .planner-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .card {
+                background: white;
+                border-radius: 12px;
+                padding: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            @media (max-width: 768px) {
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .input-with-icon {
+                position: relative;
+            }
+            
+            .input-icon {
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--gray-color);
+                font-weight: 600;
+            }
+            
+            .input-with-icon .form-control {
+                padding-left: 2.5rem;
+            }
+            
+            .form-help {
+                font-size: 0.85rem;
+                color: var(--gray-color);
+                margin-top: 0.5rem;
+            }
+            
+            .form-actions {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+            
+            .categories-list {
+                margin: 1rem 0;
+            }
+            
+            .category-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem;
+                background: #f8f9fa;
+                border-radius: 8px;
+                margin-bottom: 0.5rem;
+                transition: all 0.3s ease;
+            }
+            
+            .category-item:hover {
+                background: #e9ecef;
+            }
+            
+            .category-name {
+                font-weight: 500;
+            }
+            
+            .add-category {
+                display: flex;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+            
+            .summary-stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .summary-stat {
+                text-align: center;
+                padding: 1rem;
+                background: #f8f9fa;
+                border-radius: 8px;
+            }
+            
+            .summary-stat .stat-label {
+                font-size: 0.9rem;
+                color: var(--gray-color);
+                margin-bottom: 0.5rem;
+            }
+            
+            .summary-stat .stat-value {
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+            
+            .budget-progress {
+                margin-top: 1.5rem;
+            }
+            
+            .progress-header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+            
+            .progress-labels {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 0.25rem;
+                font-size: 0.85rem;
+                color: var(--gray-color);
+            }
+            
+            .list-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .list-controls {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .expenses-table-container {
+                overflow-x: auto;
+                margin: 1rem 0;
+            }
+            
+            .expenses-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            
+            .expenses-table th {
+                background: #f8f9fa;
+                padding: 1rem;
+                text-align: left;
+                font-weight: 600;
+                color: var(--dark-color);
+                border-bottom: 2px solid #e9ecef;
+            }
+            
+            .expenses-table td {
+                padding: 1rem;
+                border-bottom: 1px solid #e9ecef;
+                vertical-align: middle;
+            }
+            
+            .expenses-table tbody tr:hover {
+                background: #f8f9fa;
+            }
+            
+            .expense-name small {
+                display: block;
+                color: var(--gray-color);
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+            }
+            
+            .category-badge {
+                background: rgba(67, 97, 238, 0.1);
+                color: var(--primary-color);
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 500;
+                display: inline-block;
+            }
+            
+            .expense-amount {
+                font-weight: 600;
+                color: var(--danger-color);
+            }
+            
+            .expense-date {
+                color: var(--gray-color);
+                font-size: 0.9rem;
+            }
+            
+            .action-buttons-small {
+                display: flex;
+                gap: 0.5rem;
+            }
+            
+            .btn-icon {
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--gray-color);
+                font-size: 1rem;
+                padding: 0.25rem;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+            
+            .btn-icon:hover {
+                background: #f8f9fa;
+                color: var(--danger-color);
+            }
+            
+            .no-expenses .empty-state {
+                text-align: center;
+                padding: 3rem 1rem;
+                color: var(--gray-color);
+            }
+            
+            .no-expenses .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                opacity: 0.5;
+            }
+            
+            .list-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 1.5rem;
+                padding-top: 1rem;
+                border-top: 1px solid #e9ecef;
+            }
+            
+            .pagination {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .total-summary {
+                font-weight: 600;
+                font-size: 1.1rem;
+            }
+            
+            .calculator-results {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            @media (max-width: 480px) {
+                .calculator-results {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .result {
+                background: #f8f9fa;
+                padding: 0.75rem;
+                border-radius: 8px;
+            }
+            
+            .result-label {
+                display: block;
+                font-size: 0.9rem;
+                color: var(--gray-color);
+                margin-bottom: 0.25rem;
+            }
+            
+            .result-value {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+            
+            .tips-list {
+                margin-top: 1rem;
+            }
+            
+            .tip {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+                padding: 0.75rem;
+                background: #f8f9fa;
+                border-radius: 8px;
+            }
+            
+            .tip i {
+                color: var(--success-color);
+                margin-top: 0.25rem;
+            }
+            
+            .action-section {
+                padding: 2rem 0;
+                background: linear-gradient(135deg, #f5f7fb 0%, #e3e9ff 100%);
+            }
+            
+            .action-buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .planner-alert {
+                position: relative;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                animation: slideDown 0.3s ease;
+            }
+            
+            .alert-success {
+                background: rgba(76, 201, 240, 0.1);
+                border-left: 4px solid var(--success-color);
+                color: #0c5460;
+            }
+            
+            .alert-danger {
+                background: rgba(247, 37, 133, 0.1);
+                border-left: 4px solid var(--danger-color);
+                color: #721c24;
+            }
+            
+            .alert-info {
+                background: rgba(67, 97, 238, 0.1);
+                border-left: 4px solid var(--primary-color);
+                color: #0d3b66;
+            }
+            
+            .alert-warning {
+                background: rgba(248, 150, 30, 0.1);
+                border-left: 4px solid var(--warning-color);
+                color: #856404;
+            }
+            
+            .close-alert {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                margin-left: auto;
+                color: inherit;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+            }
+            
+            .close-alert:hover {
+                opacity: 1;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

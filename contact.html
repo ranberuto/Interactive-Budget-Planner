@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | BudgetPlanner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💰 EveryJuan</a>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="planner.html"><i class="fas fa-calculator"></i> Planner</a></li>
+                <li><a href="savings-goal.html"><i class="fas fa-target"></i> Savings Goal</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+            <p class="hero-subtitle" style="color: black;">
+                Have questions, feedback, or suggestions? We'd love to hear from you!
+            </p>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <div class="form-card">
+                        <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+                        <p class="form-subtitle">Fill out the form below and we'll get back to you as soon as possible.</p>
+                        
+                        <form id="contact-form">
+                            <!-- Form Messages -->
+                            <div id="form-messages" class="form-messages"></div>
+                            
+                            <!-- Name Field -->
+                            <div class="form-group">
+                                <label for="contact-name">
+                                    <i class="fas fa-user"></i> Full Name *
+                                </label>
+                                <input type="text" id="contact-name" class="form-control" 
+                                       placeholder="Enter your full name" 
+                                       minlength="2" maxlength="50">
+                                <div class="error-message" id="name-error"></div>
+                            </div>
+                            
+                            <!-- Email Field -->
+                            <div class="form-group">
+                                <label for="contact-email">
+                                    <i class="fas fa-envelope"></i> Email Address *
+                                </label>
+                                <input type="email" id="contact-email" class="form-control" 
+                                       placeholder="Enter your email address">
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+                            
+                            <!-- Subject Field -->
+                            <div class="form-group">
+                                <label for="contact-subject">
+                                    <i class="fas fa-tag"></i> Subject *
+                                </label>
+                                <select id="contact-subject" class="form-control">
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="feedback">Feature Request/Feedback</option>
+                                    <option value="bug">Report a Bug</option>
+                                    <option value="help">Need Help Using BudgetPlanner</option>
+                                    <option value="privacy">Privacy Question</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="error-message" id="subject-error"></div>
+                            </div>
+                            
+                            <!-- Message Field -->
+                            <div class="form-group">
+                                <label for="contact-message">
+                                    <i class="fas fa-comment"></i> Message *
+                                </label>
+                                <textarea id="contact-message" class="form-control" 
+                                          placeholder="Please write your message here..." 
+                                          rows="6" minlength="10" maxlength="1000"></textarea>
+                                <div class="char-counter">
+                                    <span id="char-count">0</span> / 1000 characters
+                                </div>
+                                <div class="error-message" id="message-error"></div>
+                            </div>
+                            
+                            <!-- Priority Field -->
+                            <div class="form-group">
+                                <label for="contact-priority">
+                                    <i class="fas fa-flag"></i> Priority Level
+                                </label>
+                                <div class="priority-options">
+                                    <label class="priority-option">
+                                        <input type="radio" name="priority" value="low" checked>
+                                        <span class="priority-label low">
+                                            <i class="fas fa-info-circle"></i> Low
+                                        </span>
+                                    </label>
+                                    <label class="priority-option">
+                                        <input type="radio" name="priority" value="medium">
+                                        <span class="priority-label medium">
+                                            <i class="fas fa-exclamation-circle"></i> Medium
+                                        </span>
+                                    </label>
+                                    <label class="priority-option">
+                                        <input type="radio" name="priority" value="high">
+                                        <span class="priority-label high">
+                                            <i class="fas fa-exclamation-triangle"></i> High
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="form-actions">
+                                <button type="submit" id="submit-btn" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                                <button type="button" id="reset-btn" class="btn btn-secondary">
+                                    <i class="fas fa-redo"></i> Reset Form
+                                </button>
+                            </div>
+                            
+                            <p class="form-note">
+                                <i class="fas fa-info-circle"></i> Fields marked with * are required.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="contact-info-section">
+                    <!-- Contact Methods -->
+                    <div class="info-card">
+                        <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>Email</h4>
+                                    <p>lanbertgfrancisco@iskolarngbayan.pup.edu.ph</p>
+                                    <small>We typically respond within 24 hours</small>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>Phone</h4>
+                                    <p>+639763122091</p>
+                                    <small>Monday-Friday, 9AM-5PM (GMT+8)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>Location</h4>
+                                    <p>007 Finance Street</p>
+                                    <p>Cebu, Philippines 6000</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>Business Hours</h4>
+                                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                    <p>Saturday: 10:00 AM - 2:00 PM</p>
+                                    <p>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Preview -->
+                    <div class="faq-preview">
+                        <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <h4>How long does it take to get a response?</h4>
+                                <p>We aim to respond to all inquiries within 24 hours during business days.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4>Do you offer technical support?</h4>
+                                <p>Yes! We provide free technical support for all users of BudgetPlanner.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4>Can I suggest new features?</h4>
+                                <p>Absolutely! We love hearing feature requests from our users.</p>
+                            </div>
+                        </div>
+                        <a href="about.html#faq" class="btn-link">
+                            View all FAQs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-card">
+                        <h3><i class="fas fa-share-alt"></i> Connect With Us</h3>
+                        <p>Follow us on social media for updates, tips, and financial advice.</p>
+                        <div class="social-links">
+                            
+                            <a href="#" class="social-link facebook">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-link linkedin">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                         
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-card">
+                <h3><i class="fas fa-map-marked-alt"></i> Our Location</h3>
+                <div class="map-placeholder">
+                    <div class="map-content">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h4>EveryJuanBudgetPlanner Headquarters</h4>
+                        <p>007 Finance Street, Cebu, Philippines 6000</p>
+                        <p class="map-note">Note: This is a virtual office. BudgetPlanner operates entirely online.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need Immediate Help?</h2>
+                <p>Check out our comprehensive documentation and user guides.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-book"></i> User Guide
+                    </a>
+                    <a href="about.html#faq" class="btn btn-secondary">
+                        <i class="fas fa-question-circle"></i> View FAQs
+                    </a>
+                    <a href="planner.html" class="btn btn-outline">
+                        <i class="fas fa-calculator"></i> Back to Planner
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💰 BudgetPlanner</h3>
+                    <p>Making personal finance management simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="planner.html">Budget Planner</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@everyjuanbudgetplanner.com</p>
+                    <p><i class="fas fa-phone"></i> +639 09876 5083</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> EveruJuanBudgetPlanner. All rights reserved. | Personal Finance Management Tool</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Menu toggle for mobile
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Form elements
+            const contactForm = document.getElementById('contact-form');
+            const nameInput = document.getElementById('contact-name');
+            const emailInput = document.getElementById('contact-email');
+            const subjectSelect = document.getElementById('contact-subject');
+            const messageTextarea = document.getElementById('contact-message');
+            const charCount = document.getElementById('char-count');
+            const submitBtn = document.getElementById('submit-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            
+            // Character counter for message
+            messageTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.textContent = currentLength;
+                
+                // Update color based on length
+                if (currentLength > 900) {
+                    charCount.style.color = '#f72585';
+                } else if (currentLength > 800) {
+                    charCount.style.color = '#f8961e';
+                } else {
+                    charCount.style.color = '#4cc9f0';
+                }
+            });
+            
+            // Validation functions
+            function validateName() {
+                const name = nameInput.value.trim();
+                const errorElement = document.getElementById('name-error');
+                
+                if (!name) {
+                    showError(nameInput, errorElement, 'Please enter your name');
+                    return false;
+                }
+                
+                if (name.length < 2) {
+                    showError(nameInput, errorElement, 'Name must be at least 2 characters');
+                    return false;
+                }
+                
+                if (name.length > 50) {
+                    showError(nameInput, errorElement, 'Name cannot exceed 50 characters');
+                    return false;
+                }
+                
+                clearError(nameInput, errorElement);
+                return true;
+            }
+            
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                const errorElement = document.getElementById('email-error');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!email) {
+                    showError(emailInput, errorElement, 'Please enter your email address');
+                    return false;
+                }
+                
+                if (!emailRegex.test(email)) {
+                    showError(emailInput, errorElement, 'Please enter a valid email address');
+                    return false;
+                }
+                
+                clearError(emailInput, errorElement);
+                return true;
+            }
+            
+            function validateSubject() {
+                const subject = subjectSelect.value;
+                const errorElement = document.getElementById('subject-error');
+                
+                if (!subject) {
+                    showError(subjectSelect, errorElement, 'Please select a subject');
+                    return false;
+                }
+                
+                clearError(subjectSelect, errorElement);
+                return true;
+            }
+            
+            function validateMessage() {
+                const message = messageTextarea.value.trim();
+                const errorElement = document.getElementById('message-error');
+                
+                if (!message) {
+                    showError(messageTextarea, errorElement, 'Please enter your message');
+                    return false;
+                }
+                
+                if (message.length < 10) {
+                    showError(messageTextarea, errorElement, 'Message must be at least 10 characters');
+                    return false;
+                }
+                
+                if (message.length > 1000) {
+                    showError(messageTextarea, errorElement, 'Message cannot exceed 1000 characters');
+                    return false;
+                }
+                
+                clearError(messageTextarea, errorElement);
+                return true;
+            }
+            
+            // Show error function
+            function showError(input, errorElement, message) {
+                input.classList.add('error');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            // Clear error function
+            function clearError(input, errorElement) {
+                input.classList.remove('error');
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+            }
+            
+            // Real-time validation
+            nameInput.addEventListener('blur', validateName);
+            nameInput.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateName();
+                }
+            });
+            
+            emailInput.addEventListener('blur', validateEmail);
+            emailInput.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateEmail();
+                }
+            });
+            
+            subjectSelect.addEventListener('change', validateSubject);
+            messageTextarea.addEventListener('blur', validateMessage);
+            messageTextarea.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateMessage();
+                }
+            });
+            
+            // Form submission
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate all fields
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isSubjectValid = validateSubject();
+                const isMessageValid = validateMessage();
+                
+                if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+                    // Show loading state
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate form submission (in a real app, this would send to a server)
+                    setTimeout(() => {
+                        // Show success message
+                        const formMessages = document.getElementById('form-messages');
+                        formMessages.innerHTML = `
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h4>Message Sent Successfully!</h4>
+                                    <p>Thank you for contacting us. We've received your message and will respond within 24 hours.</p>
+                                    <p><strong>Reference ID:</strong> BP-${Date.now().toString().slice(-6)}</p>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Reset form
+                        contactForm.reset();
+                        charCount.textContent = '0';
+                        
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Scroll to success message
+                        formMessages.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Remove success message after 10 seconds
+                        setTimeout(() => {
+                            formMessages.innerHTML = '';
+                        }, 10000);
+                        
+                        // Log form data (in a real app, this would be sent to a server)
+                        const formData = {
+                            name: nameInput.value.trim(),
+                            email: emailInput.value.trim(),
+                            subject: subjectSelect.value,
+                            message: messageTextarea.value.trim(),
+                            priority: document.querySelector('input[name="priority"]:checked').value,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        console.log('Form submitted:', formData);
+                        
+                    }, 1500); // Simulate network delay
+                } else {
+                    // Show error message if validation fails
+                    const formMessages = document.getElementById('form-messages');
+                    formMessages.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div>
+                                <h4>Please fix the errors above</h4>
+                                <p>Some fields require your attention before submitting.</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Scroll to error message
+                    formMessages.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+            
+            // Form reset
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset the form? All entered data will be lost.')) {
+                    contactForm.reset();
+                    charCount.textContent = '0';
+                    
+                    // Clear all errors
+                    const errorElements = document.querySelectorAll('.error-message');
+                    errorElements.forEach(el => {
+                        el.textContent = '';
+                        el.style.display = 'none';
+                    });
+                    
+                    // Clear error classes
+                    const errorInputs = document.querySelectorAll('.error');
+                    errorInputs.forEach(input => {
+                        input.classList.remove('error');
+                    });
+                    
+                    // Clear form messages
+                    document.getElementById('form-messages').innerHTML = '';
+                    
+                    // Focus on first field
+                    nameInput.focus();
+                }
+            });
+            
+            // Initialize character counter
+            charCount.textContent = messageTextarea.value.length;
+        });
+        
+        // Add custom styles for contact page
+        const style = document.createElement('style');
+        style.textContent = `
+            .contact-hero {
+                padding: 3rem 0;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                text-align: center;
+            }
+            
+            .contact-hero h1 {
+                color: white;
+                margin-bottom: 1rem;
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                max-width: 600px;
+                margin: 0 auto;
+                opacity: 0.9;
+            }
+            
+            .contact-content {
+                padding: 3rem 0;
+                background-color: var(--body-bg);
+            }
+            
+            .contact-grid {
+                display: grid;
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 2rem;
+            }
+            
+            @media (max-width: 992px) {
+                .contact-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .form-card {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            }
+            
+            .form-card h2 {
+                color: var(--secondary-color);
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .form-subtitle {
+                color: var(--gray-color);
+                margin-bottom: 2rem;
+                padding-bottom: 1.5rem;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .form-messages {
+                margin-bottom: 1.5rem;
+            }
+            
+            .alert {
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+                animation: slideDown 0.3s ease;
+            }
+            
+            .alert-success {
+                background: rgba(76, 201, 240, 0.1);
+                border: 1px solid rgba(76, 201, 240, 0.3);
+                color: #0c5460;
+            }
+            
+            .alert-danger {
+                background: rgba(247, 37, 133, 0.1);
+                border: 1px solid rgba(247, 37, 133, 0.3);
+                color: #721c24;
+            }
+            
+            .alert i {
+                font-size: 1.5rem;
+                margin-top: 0.25rem;
+            }
+            
+            .alert h4 {
+                margin-bottom: 0.5rem;
+            }
+            
+            .alert p {
+                margin-bottom: 0.25rem;
+                font-size: 0.95rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                color: var(--dark-color);
+            }
+            
+            .form-group label i {
+                color: var(--primary-color);
+            }
+            
+            .form-control {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border: 2px solid #e1e5eb;
+                border-radius: 8px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                font-family: inherit;
+            }
+            
+            .form-control:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+            }
+            
+            .form-control.error {
+                border-color: var(--danger-color);
+                background-color: rgba(247, 37, 133, 0.05);
+            }
+            
+            textarea.form-control {
+                resize: vertical;
+                min-height: 120px;
+                max-height: 300px;
+            }
+            
+            .char-counter {
+                text-align: right;
+                font-size: 0.85rem;
+                color: var(--gray-color);
+                margin-top: 0.5rem;
+            }
+            
+            #char-count {
+                font-weight: 600;
+            }
+            
+            .error-message {
+                color: var(--danger-color);
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+                display: none;
+            }
+            
+            .priority-options {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-top: 0.5rem;
+            }
+            
+            .priority-option {
+                cursor: pointer;
+            }
+            
+            .priority-option input[type="radio"] {
+                display: none;
+            }
+            
+            .priority-label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                border: 2px solid #e1e5eb;
+                transition: all 0.3s ease;
+                user-select: none;
+            }
+            
+            .priority-label.low {
+                color: var(--success-color);
+            }
+            
+            .priority-label.medium {
+                color: var(--warning-color);
+            }
+            
+            .priority-label.high {
+                color: var(--danger-color);
+            }
+            
+            .priority-option input[type="radio"]:checked + .priority-label {
+                background-color: rgba(67, 97, 238, 0.1);
+                border-color: var(--primary-color);
+            }
+            
+            .priority-option:hover .priority-label {
+                background-color: #f8f9fa;
+            }
+            
+            .form-actions {
+                display: flex;
+                gap: 1rem;
+                margin: 2rem 0 1rem;
+            }
+            
+            .form-note {
+                font-size: 0.9rem;
+                color: var(--gray-color);
+                text-align: center;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid #e9ecef;
+            }
+            
+            .form-note i {
+                color: var(--primary-color);
+                margin-right: 0.5rem;
+            }
+            
+            .info-card {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: 2rem;
+            }
+            
+            .info-card h3 {
+                color: var(--secondary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .contact-methods {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .contact-method {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .method-icon {
+                flex-shrink: 0;
+                width: 50px;
+                height: 50px;
+                background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .method-icon i {
+                font-size: 1.2rem;
+                color: white;
+            }
+            
+            .method-content h4 {
+                color: var(--dark-color);
+                margin-bottom: 0.25rem;
+                font-size: 1.1rem;
+            }
+            
+            .method-content p {
+                color: var(--dark-color);
+                margin-bottom: 0.25rem;
+                font-weight: 500;
+            }
+            
+            .method-content small {
+                color: var(--gray-color);
+                font-size: 0.85rem;
+            }
+            
+            .faq-preview {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+                margin-bottom: 2rem;
+            }
+            
+            .faq-preview h3 {
+                color: var(--secondary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .faq-list {
+                margin-bottom: 1.5rem;
+            }
+            
+            .faq-item {
+                margin-bottom: 1rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .faq-item:last-child {
+                border-bottom: none;
+            }
+            
+            .faq-item h4 {
+                color: var(--dark-color);
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+            }
+            
+            .faq-item p {
+                color: var(--gray-color);
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .btn-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--primary-color);
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            
+            .btn-link:hover {
+                gap: 0.75rem;
+                color: var(--secondary-color);
+            }
+            
+            .social-card {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            }
+            
+            .social-card h3 {
+                color: var(--secondary-color);
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .social-card p {
+                color: var(--gray-color);
+                margin-bottom: 1.5rem;
+            }
+            
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            @media (max-width: 480px) {
+                .social-links {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            .social-link {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                text-decoration: none;
+                color: white;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+            
+            .social-link.twitter {
+                background-color: #1DA1F2;
+            }
+            
+            .social-link.facebook {
+                background-color: #1877F2;
+            }
+            
+            .social-link.instagram {
+                background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            }
+            
+            .social-link.linkedin {
+                background-color: #0077B5;
+            }
+            
+            .social-link.github {
+                background-color: #333;
+            }
+            
+            .social-link:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .map-section {
+                padding: 3rem 0;
+                background: linear-gradient(135deg, #f5f7fb 0%, #e3e9ff 100%);
+            }
+            
+            .map-card {
+                background: white;
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            }
+            
+            .map-card h3 {
+                color: var(--secondary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .map-placeholder {
+                height: 300px;
+                background: linear-gradient(135deg, #e3e9ff 0%, #d4dbf8 100%);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: var(--secondary-color);
+            }
+            
+            .map-content i {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                color: var(--primary-color);
+            }
+            
+            .map-content h4 {
+                margin-bottom: 0.5rem;
+                color: var(--dark-color);
+            }
+            
+            .map-content p {
+                color: var(--gray-color);
+                margin-bottom: 0.5rem;
+            }
+            
+            .map-note {
+                font-size: 0.9rem;
+                font-style: italic;
+                opacity: 0.7;
+            }
+            
+            .cta-section {
+                padding: 4rem 0;
+                background: white;
+                text-align: center;
+            }
+            
+            .cta-content h2 {
+                color: var(--secondary-color);
+                margin-bottom: 1rem;
+                font-size: 2rem;
+            }
+            
+            .cta-content p {
+                color: var(--gray-color);
+                margin-bottom: 2rem;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .cta-buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn-outline {
+                background: white;
+                color: var(--primary-color);
+                border: 2px solid var(--primary-color);
+            }
+            
+            .btn-outline:hover {
+                background: rgba(67, 97, 238, 0.1);
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .contact-hero h1 {
+                    font-size: 2rem;
+                }
+                
+                .form-actions {
+                    flex-direction: column;
+                }
+                
+                .form-actions .btn {
+                    width: 100%;
+                }
+                
+                .cta-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .cta-buttons .btn {
+                    width: 100%;
+                    max-width: 300px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

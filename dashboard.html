@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard | EveryJuan Budget Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard-premium.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💰 EveryJuan</a>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="planner.html"><i class="fas fa-calculator"></i> Planner</a></li>
+                <li><a href="savings-goal.html"><i class="fas fa-target"></i> Savings Goal</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header premium-header">
+        <div class="header-background"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 id="dashboard-title"><i class="fas fa-tachometer-alt"></i> <span id="dashboard-title-text"></span></h1>
+                    <p class="subtitle">Real-time overview of your financial health and spending patterns</p>
+                </div>
+                <div class="header-controls">
+                    <select id="time-period" class="form-control dashboard-select premium-select">
+                        <option value="current">Current Month</option>
+                        <option value="last">Last Month</option>
+                        <option value="quarter">This Quarter</option>
+                        <option value="year">This Year</option>
+                    </select>
+                    <button id="refresh-data" class="btn btn-primary premium-btn" onclick="refreshDashboard()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button id="export-dashboard" class="btn btn-primary premium-btn" onclick="exportDashboardReport()" style="background-color: #06d6a0;">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Summary Cards - Premium Design -->
+    <section class="metrics-section premium-metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <!-- Total Income -->
+                <div class="metric-card income-card premium-card">
+                    <div class="card-background gradient-income"></div>
+                    <div class="metric-icon-box">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="metric-header">
+                        <h4>Total Income</h4>
+                        <span class="metric-badge positive"><i class="fas fa-arrow-up"></i> 5.2%</span>
+                    </div>
+                    <div class="metric-value" id="total-income">₱150,000</div>
+                    <div class="metric-subtext">Monthly take-home</div>
+                    <div class="metric-bar premium-bar">
+                        <div class="metric-fill" style="width: 100%; background: linear-gradient(90deg, #4cc9f0, #0ea5e9);"></div>
+                    </div>
+                </div>
+
+                <!-- Total Expenses -->
+                <div class="metric-card expense-card premium-card">
+                    <div class="card-background gradient-expense"></div>
+                    <div class="metric-icon-box">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="metric-header">
+                        <h4>Total Expenses</h4>
+                        <span class="metric-badge warning"><i class="fas fa-arrow-up"></i> 2.1%</span>
+                    </div>
+                    <div class="metric-value" id="total-expenses">₱87,500</div>
+                    <div class="metric-subtext" id="expense-percentage">58.3% of income</div>
+                    <div class="metric-bar premium-bar">
+                        <div class="metric-fill" id="expense-bar" style="width: 58.3%; background: linear-gradient(90deg, #f8961e, #ff7f0e);"></div>
+                    </div>
+                </div>
+
+                <!-- Net Savings -->
+                <div class="metric-card savings-card premium-card">
+                    <div class="card-background gradient-savings"></div>
+                    <div class="metric-icon-box">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="metric-header">
+                        <h4>Net Savings</h4>
+                        <span class="metric-badge positive"><i class="fas fa-arrow-up"></i> 8.3%</span>
+                    </div>
+                    <div class="metric-value" id="net-savings">₱62,500</div>
+                    <div class="metric-subtext" id="savings-percentage">41.7% of income</div>
+                    <div class="metric-bar premium-bar">
+                        <div class="metric-fill" id="savings-bar" style="width: 41.7%; background: linear-gradient(90deg, #06d6a0, #10b981);"></div>
+                    </div>
+                </div>
+
+                <!-- Budget Health -->
+                <div class="metric-card health-card premium-card">
+                    <div class="card-background gradient-health"></div>
+                    <div class="metric-icon-box">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <div class="metric-header">
+                        <h4>Budget Health</h4>
+                        <span class="metric-badge positive">Excellent</span>
+                    </div>
+                    <div class="metric-value" id="health-score">85%</div>
+                    <div class="metric-subtext">Excellent financial health</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section - Enhanced Premium Design -->
+    <section class="charts-section premium-charts">
+        <div class="container">
+            <!-- Analytics & Insights Section -->
+            <div class="analytics-section">
+                <h2 style="margin-bottom: 0.5rem; color: var(--dark-color);"><i class="fas fa-lightbulb"></i> Smart Financial Insights</h2>
+                <div id="insights-list" class="insights-grid premium-insights-grid">
+                    <!-- Insights will be dynamically populated here -->
+                </div>
+            </div>
+
+            <!-- Top Row: Main Charts -->
+            <div class="charts-grid-main">
+                <!-- Expense Category Breakdown -->
+                <div class="chart-card premium-chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title-section">
+                            <h3><i class="fas fa-chart-pie"></i> Expense Breakdown</h3>
+                            <span class="chart-date">January 2026</span>
+                        </div>
+                        <div class="chart-menu">
+                            <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper premium-wrapper">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                    <div class="chart-legend-custom">
+                        <div class="legend-item"><span class="legend-dot" style="background: #4cc9f0;"></span> Housing</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #f8961e;"></span> Food</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #06d6a0;"></span> Utilities</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #ff7f0e;"></span> Transport</div>
+                    </div>
+                </div>
+
+                <!-- Income vs Expenses -->
+                <div class="chart-card premium-chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title-section">
+                            <h3><i class="fas fa-chart-bar"></i> Income vs Expenses</h3>
+                            <span class="chart-date">Monthly Comparison</span>
+                        </div>
+                        <div class="chart-menu">
+                            <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper premium-wrapper">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spending Trend -->
+            <div class="chart-card premium-chart-card full-width-chart">
+                <div class="chart-header">
+                    <div class="chart-title-section">
+                        <h3><i class="fas fa-chart-line"></i> 6-Month Spending Trend</h3>
+                        <span class="chart-date">Last 6 Months</span>
+                    </div>
+                    <div class="chart-menu">
+                        <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <div class="chart-wrapper-large premium-wrapper-large">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Income vs Expenses Area Chart -->
+            <div class="chart-card premium-chart-card full-width-chart">
+                <div class="chart-header">
+                    <div class="chart-title-section">
+                        <h3><i class="fas fa-chart-area"></i> Income vs Expenses Comparison</h3>
+                        <span class="chart-date">6-Month Overview</span>
+                    </div>
+                    <div class="chart-menu">
+                        <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <div class="chart-wrapper-large premium-wrapper-large">
+                    <canvas id="areaChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Category Comparison & Budget Health Row -->
+            <div class="charts-grid-secondary">
+                <!-- Horizontal Bar Chart for Categories -->
+                <div class="chart-card premium-chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title-section">
+                            <h3><i class="fas fa-bars"></i> Category Spending Comparison</h3>
+                            <span class="chart-date">Ranked by Amount</span>
+                        </div>
+                        <div class="chart-menu">
+                            <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper premium-wrapper">
+                        <canvas id="categoryComparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Radar Chart for Budget Health -->
+                <div class="chart-card premium-chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title-section">
+                            <h3><i class="fas fa-spider"></i> Financial Health Score</h3>
+                            <span class="chart-date">Performance Metrics</span>
+                        </div>
+                        <div class="chart-menu">
+                            <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper premium-wrapper">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Savings Pie Chart -->
+                <div class="chart-card premium-chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title-section">
+                            <h3><i class="fas fa-pie-chart"></i> Savings Ratio</h3>
+                            <span class="chart-date">Monthly Breakdown</span>
+                        </div>
+                        <div class="chart-menu">
+                            <button class="chart-option-btn"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper premium-wrapper">
+                        <canvas id="savingsPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Details Grid -->
+            <div class="expense-details-grid premium-details-grid">
+                <!-- Top Expenses -->
+                <div class="detail-card premium-detail-card">
+                    <div class="card-header premium-card-header">
+                        <h4><i class="fas fa-arrow-down"></i> Top 5 Expenses</h4>
+                        <a href="#" class="view-all">View All →</a>
+                    </div>
+                    <div class="expense-list premium-expense-list" id="topExpensesList">
+                        <div class="expense-item premium-expense-item">
+                            <div class="expense-icon">🏠</div>
+                            <div class="expense-info">
+                                <span class="expense-name">Monthly Rent</span>
+                                <span class="expense-category">Housing</span>
+                            </div>
+                            <span class="expense-amount premium-amount">₱35,000</span>
+                        </div>
+                        <div class="expense-item premium-expense-item">
+                            <div class="expense-icon">🍔</div>
+                            <div class="expense-info">
+                                <span class="expense-name">Groceries & Food</span>
+                                <span class="expense-category">Food</span>
+                            </div>
+                            <span class="expense-amount premium-amount">₱18,500</span>
+                        </div>
+                        <div class="expense-item premium-expense-item">
+                            <div class="expense-icon">💡</div>
+                            <div class="expense-info">
+                                <span class="expense-name">Utilities</span>
+                                <span class="expense-category">Utilities</span>
+                            </div>
+                            <span class="expense-amount premium-amount">₱8,750</span>
+                        </div>
+                        <div class="expense-item premium-expense-item">
+                            <div class="expense-icon">🚗</div>
+                            <div class="expense-info">
+                                <span class="expense-name">Transportation</span>
+                                <span class="expense-category">Transport</span>
+                            </div>
+                            <span class="expense-amount premium-amount">₱15,000</span>
+                        </div>
+                        <div class="expense-item premium-expense-item">
+                            <div class="expense-icon">🎬</div>
+                            <div class="expense-info">
+                                <span class="expense-name">Entertainment</span>
+                                <span class="expense-category">Entertainment</span>
+                            </div>
+                            <span class="expense-amount premium-amount">₱10,250</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Performance -->
+                <div class="detail-card premium-detail-card">
+                    <div class="card-header premium-card-header">
+                        <h4><i class="fas fa-list-check"></i> Category Status</h4>
+                        <a href="#" class="view-all">View All →</a>
+                    </div>
+                    <div class="category-performance premium-category">
+                        <div class="category-item premium-category-item">
+                            <div class="category-header-row">
+                                <div class="category-name">🏠 Housing</div>
+                                <span class="category-spent">₱35,000 / ₱40,000</span>
+                            </div>
+                            <div class="category-progress premium-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 87%; background: linear-gradient(90deg, #4cc9f0, #0ea5e9);"></div>
+                                </div>
+                            </div>
+                            <span class="status-ok">✓ On Track</span>
+                        </div>
+                        <div class="category-item premium-category-item">
+                            <div class="category-header-row">
+                                <div class="category-name">🍔 Food</div>
+                                <span class="category-spent">₱18,500 / ₱20,000</span>
+                            </div>
+                            <div class="category-progress premium-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 92%; background: linear-gradient(90deg, #f8961e, #ff7f0e);"></div>
+                                </div>
+                            </div>
+                            <span class="status-warning">⚠ Near Limit</span>
+                        </div>
+                        <div class="category-item premium-category-item">
+                            <div class="category-header-row">
+                                <div class="category-name">💡 Utilities</div>
+                                <span class="category-spent">₱8,750 / ₱12,500</span>
+                            </div>
+                            <div class="category-progress premium-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%; background: linear-gradient(90deg, #4cc9f0, #0ea5e9);"></div>
+                                </div>
+                            </div>
+                            <span class="status-ok">✓ On Track</span>
+                        </div>
+                        <div class="category-item premium-category-item">
+                            <div class="category-header-row">
+                                <div class="category-name">🚗 Transport</div>
+                                <span class="category-spent">₱15,000 / ₱20,000</span>
+                            </div>
+                            <div class="category-progress premium-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%; background: linear-gradient(90deg, #4cc9f0, #0ea5e9);"></div>
+                                </div>
+                            </div>
+                            <span class="status-ok">✓ On Track</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Summary -->
+                <div class="detail-card premium-detail-card">
+                    <div class="card-header premium-card-header">
+                        <h4><i class="fas fa-calendar-check"></i> Monthly Summary</h4>
+                    </div>
+                    <div class="summary-stats premium-summary">
+                        <div class="summary-item premium-summary-item">
+                            <div class="summary-icon income-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="stat-label">Income</div>
+                                <div class="stat-value">₱150,000</div>
+                                <div class="stat-change positive-change">+5.2% vs last month</div>
+                            </div>
+                        </div>
+                        <div class="summary-item premium-summary-item">
+                            <div class="summary-icon expense-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="stat-label">Expenses</div>
+                                <div class="stat-value">₱87,500</div>
+                                <div class="stat-change warning-change">+2.1% vs last month</div>
+                            </div>
+                        </div>
+                        <div class="summary-item premium-summary-item">
+                            <div class="summary-icon savings-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="stat-label">Savings</div>
+                                <div class="stat-value">₱62,500</div>
+                                <div class="stat-change positive-change">+8.3% vs last month</div>
+                            </div>
+                        </div>
+                        <div class="summary-item premium-summary-item">
+                            <div class="summary-icon rate-icon">
+                                <i class="fas fa-percent"></i>
+                            </div>
+                            <div class="summary-content">
+                                <div class="stat-label">Savings Rate</div>
+                                <div class="stat-value">41.7%</div>
+                                <div class="stat-change excellent">Excellent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Categories Comparison - Premium Table -->
+    <section class="comparison-section premium-comparison">
+        <div class="container">
+            <h2><i class="fas fa-layer-group"></i> Budget Categories Overview</h2>
+            <div class="categories-table-wrapper premium-table-wrapper">
+                <table class="categories-table premium-categories-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Budget</th>
+                            <th>Spent</th>
+                            <th>Remaining</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="premium-table-row">
+                            <td><strong>🏠 Housing</strong></td>
+                            <td>₱40,000</td>
+                            <td>₱35,000</td>
+                            <td>₱5,000</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 87%;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>🍔 Food</strong></td>
+                            <td>₱20,000</td>
+                            <td>₱18,500</td>
+                            <td>₱1,500</td>
+                            <td><span class="status-badge status-warning">⚠ Near Limit</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 92%; background: #f8961e;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>💡 Utilities</strong></td>
+                            <td>₱12,500</td>
+                            <td>₱8,750</td>
+                            <td>₱3,750</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 70%;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>🚗 Transportation</strong></td>
+                            <td>₱20,000</td>
+                            <td>₱15,000</td>
+                            <td>₱5,000</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 75%;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>🎬 Entertainment</strong></td>
+                            <td>₱12,000</td>
+                            <td>₱10,250</td>
+                            <td>₱1,750</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 85%;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>💊 Healthcare</strong></td>
+                            <td>₱8,000</td>
+                            <td>₱5,000</td>
+                            <td>₱3,000</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 62.5%;"></div></div></td>
+                        </tr>
+                        <tr class="premium-table-row">
+                            <td><strong>📚 Education</strong></td>
+                            <td>₱10,000</td>
+                            <td>₱7,000</td>
+                            <td>₱3,000</td>
+                            <td><span class="status-badge status-ok">✓ On Track</span></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 70%;"></div></div></td>
+                        </tr>
+                        <tr class="total-row premium-total-row">
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>₱122,500</strong></td>
+                            <td><strong>₱99,500</strong></td>
+                            <td><strong>₱23,000</strong></td>
+                            <td><strong>✓ Excellent</strong></td>
+                            <td><div class="mini-progress"><div class="mini-fill" style="width: 81%; background: #10b981;"></div></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>💰 EveryJuan BudgetPlanner</h3>
+                    <p>Making personal finance management simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="planner.html">Budget Planner</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@everyjuanbudgetplanner.com</p>
+                    <p><i class="fas fa-phone"></i> +639 09876 5083</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EveryJuanBudgetPlanner. All rights reserved. | Personal Finance Management Tool</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link to JavaScript files -->
+    <script src="script.js"></script>
+    <script src="chart-data.js"></script>
+
+</body>
+</html>

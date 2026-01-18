@@ -1,0 +1,81 @@
+INTERACTIVE WEBSITE DESIGN PROPOSAL
+
+1. STUDENT INFORMATION
+Name:
+Dane Mathew Resurreccion
+Janette Agustin
+Lanbert G. Francisco
+Shiela Marie E. Valencia
+
+Course: PBDIT 517 : Front-End Web Development
+Instructor: Engr. Arlene B. Canlas
+
+2. PROJECT OVERVIEW
+Project Title: Interactive Budget Planner
+Website Type: Personal Finance Management Tool
+
+Description:
+The Interactive Budget Planner is a front-end web application developed using HTML, CSS, and JavaScript. It helps users plan, track, analyze, and optimize personal finances in a simple and interactive way. Users can input income and expenses, categorize spending, and view financial summaries through dynamic charts and indicators. The system also provides basic analytics, personalized recommendations, and financial insights without requiring account creation or login.
+
+3. GOALS AND OBJECTIVES
+Main Goal:
+To create a simple and fully functional front-end budget planning platform that enables users to manage, monitor, and optimize their personal finances through interactive tools, visual summaries, and smart recommendations without login requirements.
+
+Specific Objectives:
+- Allow users to input and organize income and expense data
+- Categorize expenses and display clear spending breakdowns
+- Generate charts and graphs for income, expenses, savings, and trends
+- Analyze spending behavior and provide financial insights
+- Offer smart budget recommendations and personalized saving tips
+- Forecast potential savings based on spending behavior
+- Enable savings goal setting and progress visualization
+- Guide monthly savings through suggested contributions
+
+4. TARGET AUDIENCE
+The target audience includes students, young professionals, individuals, families, and small organizations seeking a simple and efficient personal finance management tool.
+
+User Expectations:
+Users expect an easy-to-use platform to track expenses, set savings goals, understand spending patterns, and receive helpful financial insights. The system should be interactive, visually clear, and easy to understand even without a finance background.
+
+5. SITE STRUCTURE AND PAGES
+Home:
+Landing page introducing the system with typing animation, call-to-action buttons, and smooth scrolling.
+
+Dashboard:
+Displays income, expenses, and savings summaries with dynamic charts, automatic updates, and visual indicators.
+
+Planner:
+Core budgeting page for inputting income and expenses with real-time calculations and dynamic charts.
+
+Analytics:
+Provides detailed spending analysis including category breakdowns and income versus expense comparisons.
+
+Recommendations:
+Displays personalized budgeting tips, overspending alerts, suggested limits, and savings advice.
+
+Savings Goal:
+Allows users to set savings targets and deadlines, track progress, view percentage completion, and manage goals.
+
+About:
+Provides information about the project and objectives.
+
+Contact Us:
+Allows users to send feedback through a validated contact form with confirmation.
+
+6. INTERACTIVE ELEMENTS
+- Typing animation for titles
+- Budget input forms with validation
+- Dynamic charts and indicators
+- Expense categorization
+- Spending analytics
+- Smart budget recommendations
+- Financial health indicators
+- Savings goal setup and tracking
+- Monthly savings target helper
+- Goal edit and reset
+- Savings forecasting
+- Personalized tips
+- Browser-based data persistence
+
+7. REFLECTION
+This project applies front-end web development skills in a practical and meaningful way by integrating financial planning concepts. It enhances skills in HTML, CSS, and JavaScript while emphasizing user-centered design, data visualization, analytics, and responsible financial habit support.
