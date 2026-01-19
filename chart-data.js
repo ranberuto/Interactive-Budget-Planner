@@ -1,4 +1,3 @@
-// Sample Budget Data for Charts
 const sampleBudgetData = {
     income: 150000,
     expenses: [
@@ -15,9 +14,7 @@ const sampleBudgetData = {
     }
 };
 
-// Chart configuration for Dashboard
 function initializeCharts() {
-    // Donut Chart for Expense Categories
     const expenseCtx = document.getElementById('expenseChart');
     if (expenseCtx) {
         new Chart(expenseCtx, {
@@ -66,7 +63,6 @@ function initializeCharts() {
         });
     }
     
-    // Bar Chart for Income vs Expenses
     const monthlyCtx = document.getElementById('monthlyChart');
     if (monthlyCtx) {
         const totalExpenses = sampleBudgetData.expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -143,7 +139,6 @@ function initializeCharts() {
         });
     }
     
-    // Line Chart for 6-Month Spending Trend
     const trendCtx = document.getElementById('trendChart');
     if (trendCtx) {
         new Chart(trendCtx, {
@@ -219,7 +214,6 @@ function initializeCharts() {
         });
     }
     
-    // Area Chart for Income vs Expenses Comparison
     const areaCtx = document.getElementById('areaChart');
     if (areaCtx) {
         new Chart(areaCtx, {
@@ -309,7 +303,6 @@ function initializeCharts() {
         });
     }
     
-    // Horizontal Bar Chart for Category Spending Comparison
     const categoryCtx = document.getElementById('categoryComparisonChart');
     if (categoryCtx) {
         new Chart(categoryCtx, {
@@ -515,16 +508,15 @@ function initializeCharts() {
     }
 }
 
-// Update charts when data changes
 function updateCharts() {
     if (typeof Chart !== 'undefined') {
         initializeCharts();
     }
 }
 
-// Load charts when dashboard loads
 if (window.location.pathname.includes('dashboard.html')) {
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(initializeCharts, 100);
     });
+
 }
