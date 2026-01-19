@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">💰 EveryJuan</a>
@@ -25,6 +26,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="about-hero">
         <div class="container">
             <div class="hero-content">
@@ -34,6 +36,7 @@
         </div>
     </section>
 
+    <!-- Mission Statement -->
     <section class="mission-section">
         <div class="container">
             <div class="mission-card">
@@ -48,10 +51,11 @@
         </div>
     </section>
 
+    <!-- About Content -->
     <section class="about-content">
         <div class="container">
             <div class="about-grid">
-
+                <!-- Project Story -->
                 <div class="about-card">
                     <div class="about-icon">
                         <i class="fas fa-history"></i>
@@ -61,6 +65,7 @@
                     <p>In 2024, we set out to create a solution that would be different—a tool that prioritizes privacy, simplicity, and immediate usability. The result is BudgetPlanner, a completely client-side application that runs entirely in your browser, with no data ever leaving your device.</p>
                 </div>
 
+                <!-- Vision -->
                 <div class="about-card">
                     <div class="about-icon">
                         <i class="fas fa-eye"></i>
@@ -70,6 +75,7 @@
                     <p>Our goal is to continue developing tools that bridge the gap between complex financial concepts and everyday users, making financial literacy not just achievable but enjoyable.</p>
                 </div>
 
+                <!-- Values -->
                 <div class="about-card">
                     <div class="about-icon">
                         <i class="fas fa-handshake"></i>
@@ -107,6 +113,7 @@
                     </div>
                 </div>
 
+                <!-- How It Works -->
                 <div class="about-card">
                     <div class="about-icon">
                         <i class="fas fa-cogs"></i>
@@ -146,7 +153,8 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Features Highlight -->
     <section class="features-highlight">
         <div class="container">
             <h2>Why Choose BudgetPlanner?</h2>
@@ -197,6 +205,7 @@
         </div>
     </section>
 
+    <!-- Team Section -->
     <section class="team-section">
         <div class="container">
             <h2>Behind BudgetPlanner</h2>
@@ -207,41 +216,42 @@
                     <div class="member-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h3>Lanbert Francisco</h3>
-                    <p class="member-role">Front-end Web Developer</p>
-                    <p class="member-bio">A student of Polytechnic University of the Philippines - PBDIT Program</p>
+                    <h3>Alex Johnson</h3>
+                    <p class="member-role">Founder & Developer</p>
+                    <p class="member-bio">With 10+ years in fintech, Alex believes everyone deserves financial empowerment.</p>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-avatar">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h3>Dane Matthew Resureccion</h3>
-                    <p class="member-role">Frond-end Web Developer</p>
-                    <p class="member-bio">A student of Polytechnic University of the Philippines - PBDIT Program</p>
+                    <h3>Maria Chen</h3>
+                    <p class="member-role">UX Designer</p>
+                    <p class="member-bio">Specializes in creating intuitive interfaces that make complex data simple to understand.</p>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-avatar">
                         <i class="fas fa-user-cog"></i>
                     </div>
-                    <h3>Shiela Marie Valencia</h3>
-                    <p class="member-role">Front-End Web Developer</p>
-                    <p class="member-bio">A student of Polytechnic University of the Philippines - PBDIT Program</p>
+                    <h3>David Kim</h3>
+                    <p class="member-role">Financial Advisor</p>
+                    <p class="member-bio">Provides expertise to ensure our tools align with sound financial principles.</p>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-avatar">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h3>Janette Dumapli Agustin</h3>
-                    <p class="member-role">Front-end Web Developer</p>
-                    <p class="member-bio">A student of Polytechnic University of the Philippines - PBDIT Program. </p>
+                    <h3>Our Community</h3>
+                    <p class="member-role">Beta Testers & Users</p>
+                    <p class="member-bio">Hundreds of users who provide feedback and help shape BudgetPlanner's future.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
             <h2>Frequently Asked Questions</h2>
@@ -308,7 +318,8 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Call to Action -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
@@ -326,6 +337,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -354,9 +366,13 @@
         </div>
     </footer>
 
+    <!-- JavaScript for FAQ and current year -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
             document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // FAQ toggle functionality
             const faqToggles = document.querySelectorAll('.faq-toggle');
             faqToggles.forEach(toggle => {
                 toggle.addEventListener('click', function() {
@@ -364,19 +380,24 @@
                     const answer = faqItem.querySelector('.faq-answer');
                     const icon = this.querySelector('i');
                     
+                    // Toggle answer visibility
                     answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
                     
+                    // Rotate icon
                     icon.style.transform = answer.style.display === 'block' ? 'rotate(180deg)' : 'rotate(0deg)';
                     
+                    // Update aria-expanded
                     const isExpanded = answer.style.display === 'block';
                     this.setAttribute('aria-expanded', isExpanded);
                 });
             });
             
+            // Open first FAQ by default
             if (faqToggles.length > 0) {
                 faqToggles[0].click();
             }
             
+            // Menu toggle for mobile
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             
@@ -390,5 +411,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
