@@ -6,7 +6,6 @@
     --info-gradient: linear-gradient(135deg, #4cc9f0 0%, #0ea5e9 100%);
 }
 
-/* Premium Header */
 .premium-header {
     position: relative;
     padding: 1.5rem 0 2rem 0;
@@ -138,7 +137,6 @@
     transform: translateY(-2px);
 }
 
-/* Premium Metrics Section */
 .premium-metrics {
     padding: 2.5rem 0;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -295,7 +293,6 @@
     color: #f8961e;
 }
 
-/* Health Score */
 .health-gauge-circle {
     position: relative;
     z-index: 1;
@@ -313,7 +310,6 @@
     box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.2);
 }
 
-/* Premium Charts Section */
 .premium-charts {
     padding: 1rem 0 3rem 0;
     background: #fafbfc;
@@ -325,7 +321,6 @@
     padding: 0 1rem;
 }
 
-/* Charts Grid Layout */
 .charts-grid-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -340,7 +335,6 @@
     margin-bottom: 3rem;
 }
 
-/* Analytics & Insights Section */
 .analytics-section {
     margin-bottom: 2rem;
     margin-top: -1.5rem;
@@ -450,7 +444,6 @@
     display: inline-block;
 }
 
-/* Premium Detail Cards */
 .premium-details-grid,
 .expense-details-grid {
     display: grid;
@@ -509,7 +502,6 @@
     margin-right: -5px;
 }
 
-/* Premium Expense List */
 .premium-expense-list {
     display: flex;
     flex-direction: column;
@@ -569,7 +561,6 @@
     margin-left: auto;
 }
 
-/* Premium Category Performance */
 .premium-category {
     display: flex;
     flex-direction: column;
@@ -631,7 +622,6 @@
     color: #f8961e;
 }
 
-/* Premium Summary Stats */
 .premium-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -717,7 +707,6 @@
     color: #667eea;
 }
 
-/* Premium Insights */
 .premium-insights {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -763,7 +752,6 @@
     font-weight: 600;
 }
 
-/* Premium Comparison Table */
 .premium-comparison {
     padding: 1rem 0 1.5rem 0;
     margin-top: 0;
@@ -833,7 +821,6 @@
     padding: 1.5rem 1.25rem;
 }
 
-/* Mini Progress Bar */
 .mini-progress {
     height: 6px;
     background: rgba(0,0,0,0.08);
@@ -848,7 +835,6 @@
     transition: width 0.3s ease;
 }
 
-/* Full Width Detail Card */
 .full-width-detail {
     grid-column: 1 / -1;
 }
@@ -858,7 +844,6 @@
     margin: 1rem 0;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .charts-grid-main {
         grid-template-columns: repeat(2, 1fr);
@@ -988,4 +973,5 @@
         font-size: 1rem;
     }
 }
+
 
